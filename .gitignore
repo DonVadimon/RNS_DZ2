@@ -114,3 +114,6 @@ build/
 
 #OS
 .DS_Store
+
+# models weights
+public/models/

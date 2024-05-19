@@ -1,6 +1,7 @@
 import path from "path";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import { Configuration } from "webpack";
+import CopyPlugin from "copy-webpack-plugin";
 
 const resoleRoot = (...paths: string[]) => path.resolve(__dirname, ...paths);
 const resoleSrc = (...paths: string[]) => resoleRoot("src", ...paths);
@@ -21,6 +22,7 @@ export default {
 
     resolve: {
         extensions: [".ts", ".tsx", ".js", ".jsx"],
+        alias: { "@": resoleSrc() },
         fallback: {
             fs: false,
             path: false,
@@ -35,6 +37,12 @@ export default {
     plugins: [
         new HtmlWebpackPlugin({
             template: resoleRoot("public", "index.ejs"),
+        }),
+        new CopyPlugin({
+            patterns: [
+                { from: "node_modules/onnxruntime-web/dist/*.wasm", to: "[name][ext]" },
+                { from: "public/models/*.onnx", to: "[name][ext]" },
+            ],
         }),
     ],
 
