@@ -164,6 +164,7 @@ export const App = () => {
                 ctx.lineWidth = 5; // толщина линии в 5px
                 ctx.strokeRect(x1, y1, width, height);
                 const msg = `${attrs.name} - ${(Number(probability) * 100).toFixed(0)}%`;
+                ctx.font = "24px serif";
                 ctx.fillText(msg, x1, y1);
             });
 
